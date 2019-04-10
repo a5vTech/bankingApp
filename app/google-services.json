@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "1013037932194",
+    "firebase_url": "https://bankingapp-jtp.firebaseio.com",
+    "project_id": "bankingapp-jtp",
+    "storage_bucket": "bankingapp-jtp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013037932194:android:b8848c6d90173453",
+        "android_client_info": {
+          "package_name": "dk.tangsolutions.bankingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013037932194-vu30dms9bd3uc3o98o3gkp1vvvjm79o4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dk.tangsolutions.bankingapp",
+            "certificate_hash": "f5c1b4236d71dc6881bbc02c6aca8c33cda42820"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1oKSXQu7B0sCl7zqqCRyW0WRJHPaCPJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013037932194-iaek548u8opti7rb3sqteubahcp2cucu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

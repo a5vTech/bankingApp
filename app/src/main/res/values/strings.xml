@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BankingApp</string>
+    <string name="remeber_me">Remember me?</string>
+    <string name="btn_login_text">Login</string>
+    <string name="password_txt">Password</string>
+    <string name="username_txt">Username</string>
+    <string name="logo">Logo</string>
+    <string name="title_activity_overview">Overview</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+</resources>
