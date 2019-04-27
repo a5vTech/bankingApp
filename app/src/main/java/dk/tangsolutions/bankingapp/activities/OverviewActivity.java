@@ -54,6 +54,8 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
 
     }
 
+
+
     private void loadData() {
         // Create reference to the current users bankaccounts
         DatabaseReference ref = database.getReference("usersBankAccounts/" + "1234567777");
@@ -102,32 +104,6 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
 
     }
 
-
-    private void loadData1() {
-        DatabaseReference ref = database.getReference("bankaccounts");
-        ref.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                bankAccounts.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    BankAccount bankAccount = postSnapshot.getValue(BankAccount.class);
-//                    Log.d("DEBUGGGGGG", bankAccount.getTransactions().get(0).getTo());
-                    bankAccounts.add(bankAccount);
-                    adapter.notifyDataSetChanged();
-
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-    }
-
     private void init() {
         this.auth = FirebaseAuth.getInstance();
         this.database = FirebaseDatabase.getInstance();
@@ -136,33 +112,6 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
         this.rv_account_list = findViewById(R.id.rv_account_list);
         this.rv_account_list.setAdapter(adapter);
         this.rv_account_list.setLayoutManager(new LinearLayoutManager(this));
-
-
-//    createDummyValuesInDB();
-
-
-//        //TEST to create entry in db
-//        Transaction transaction = new Transaction();
-//        transaction.setAmount(200.0);
-//        transaction.setTo("ME");
-//        transaction.setDate(new Date());
-//        ArrayList<Transaction> transactions = new ArrayList<>();
-//        transactions.add(transaction);
-//        Transaction transaction1 = new Transaction();
-//
-//        transaction1.setTo("STRANGER");
-//        transaction1.setAmount(300.0);
-//        transaction1.setDate(new Date());
-//        transactions.add(transaction1);
-//        bankAccount.setTransactions(transactions);
-//
-//
-//
-//        //Add bankAccount to DB as well as update any fields in bankAccount - transactions + more
-//        DatabaseReference reference = database.getReference("bankaccounts/"+bankAccount.getAccountNumber());
-//        reference.setValue(bankAccount);
-
-
     }
 
     private void createDummyValuesInDB() {

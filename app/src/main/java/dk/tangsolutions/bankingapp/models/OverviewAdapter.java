@@ -37,7 +37,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.myView
     @Override
     public void onBindViewHolder(@NonNull myViewHolder myViewHolder, int i) {
         myViewHolder.accName.setText(mData.get(i).getName());
-        myViewHolder.accNo.setText("");
+        myViewHolder.accNo.setText(""+ mData.get(i).getAccountNumber());
         myViewHolder.accBal.setText("" + mData.get(i).getBalance());
         myViewHolder.cv_cardItem.setOnClickListener((view) -> {
             Intent intent = new Intent(mContext, TransactionsActivity.class);

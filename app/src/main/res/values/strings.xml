@@ -12,5 +12,6 @@
     <string name="overview">overview</string>
     <string name="CURRENTBANKACC">currBankAccount</string>
     <string name="forgot_your_password">Forgot your password?</string>
+    <string name="btn_register">Register</string>
 
 </resources>
