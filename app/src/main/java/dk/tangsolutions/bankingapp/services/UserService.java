@@ -1,16 +1,15 @@
 package dk.tangsolutions.bankingapp.services;
-import com.google.firebase.auth.FirebaseAuth;
+
+import dk.tangsolutions.bankingapp.models.User;
 
 
 public class UserService {
+    // Stores current user
 
-private FirebaseAuth mAuth;
-    private String TAG = "USERSERVICE";
+    public UserService() {
 
-
-
-
-    public UserService(){
-        mAuth = FirebaseAuth.getInstance();
     }
+
+
 }
+

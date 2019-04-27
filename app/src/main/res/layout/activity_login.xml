@@ -2,14 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loginLayout"
+    android:id="@+id/layout_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/loginBackground"
     tools:context=".activities.LoginActivity">
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/inp_userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -24,11 +24,11 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo"
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/inp_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -42,8 +42,8 @@
         android:paddingBottom="3dp"
         android:textColorLink="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/userName"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintEnd_toEndOf="@+id/inp_userName"
+        app:layout_constraintTop_toBottomOf="@+id/inp_userName"
         tools:targetApi="o" />
 
     <Button
@@ -54,10 +54,10 @@
         android:background="@drawable/login_button_background"
         android:onClick="tempLogin"
         android:text="@string/btn_login_text"
-        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="@+id/inp_password"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintStart_toStartOf="@+id/inp_password"
+        app:layout_constraintTop_toBottomOf="@+id/inp_password" />
 
     <CheckBox
         android:id="@+id/cb_remember"
@@ -78,7 +78,7 @@
         tools:targetApi="lollipop" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_logo"
         android:layout_width="124dp"
         android:layout_height="134dp"
         android:layout_marginTop="90dp"
@@ -88,5 +88,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_fingerprint_black_24dp" />
+
+    <TextView
+        android:id="@+id/btn_resetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/forgot_your_password"
+        android:textColor="@color/input_color_background"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_remember" />
 
 </android.support.constraint.ConstraintLayout>

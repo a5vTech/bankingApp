@@ -7,20 +7,24 @@ import java.util.Map;
 public class User {
 
     //User and profile data
+    private String cpr;
     private String firstName;
     private String lastName;
-    private String cpr;
     private String email;
     private String phoneNumber;
     private String address;
 
     // Account specific data
-    private String Role;
-    private Map<String, BankAccount> bankAccounts = new HashMap<>();
+    private ArrayList<BankAccount> bankaccounts = new ArrayList<>();
+
 
 
     public User() {
     }
 
+
+
+
+    // Getters and setters
 
 }

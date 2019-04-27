@@ -2,20 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_overview"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Overblik" />
+        android:title="Overview" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Overfør" />
+        android:id="@+id/navigation_pay"
+        android:icon="@drawable/ic_payment_black_24dp"
+        android:title="Pay" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_transfer"
+        android:icon="@drawable/ic_transfer_black_24dp"
+        android:title="Transfer" />
 
+    <item
+        android:id="@+id/navigation_menu"
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="Menu" />
 
 
 </menu>

@@ -21,6 +21,18 @@
             "package_name": "dk.tangsolutions.bankingapp",
             "certificate_hash": "f5c1b4236d71dc6881bbc02c6aca8c33cda42820"
           }
+        },
+        {
+          "client_id": "1013037932194-lhrojvuoh54eri0c46ipj80kcge94f96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dk.tangsolutions.bankingapp",
+            "certificate_hash": "0e1bd1d7adbdafa8555e9dacb960db9a77649180"
+          }
+        },
+        {
+          "client_id": "1013037932194-iaek548u8opti7rb3sqteubahcp2cucu.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
