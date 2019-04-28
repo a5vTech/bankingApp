@@ -28,7 +28,7 @@
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/inp_password"
+        android:id="@+id/inp_loginpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -54,10 +54,10 @@
         android:background="@drawable/login_button_background"
         android:onClick="tempLogin"
         android:text="@string/btn_login_text"
-        app:layout_constraintEnd_toEndOf="@+id/inp_password"
+        app:layout_constraintEnd_toEndOf="@+id/inp_loginpassword"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/inp_password"
-        app:layout_constraintTop_toBottomOf="@+id/inp_password" />
+        app:layout_constraintStart_toStartOf="@+id/inp_loginpassword"
+        app:layout_constraintTop_toBottomOf="@+id/inp_loginpassword" />
 
     <Button
         android:id="@+id/btn_register"
@@ -65,11 +65,11 @@
         android:layout_height="45dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/login_button_background"
-        android:onClick="tempLogin"
+        android:onClick="register"
         android:text="@string/btn_register"
-        app:layout_constraintEnd_toEndOf="@+id/inp_password"
+        app:layout_constraintEnd_toEndOf="@+id/inp_loginpassword"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/inp_password"
+        app:layout_constraintStart_toStartOf="@+id/inp_loginpassword"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <CheckBox

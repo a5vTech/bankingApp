@@ -27,6 +27,7 @@ import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.models.OverviewAdapter;
 import dk.tangsolutions.bankingapp.models.BankAccount;
 import dk.tangsolutions.bankingapp.models.User;
+import dk.tangsolutions.bankingapp.services.AuthService;
 import dk.tangsolutions.bankingapp.services.UserService;
 
 public class OverviewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -57,8 +58,10 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
 
 
     private void loadData() {
+        AuthService auth = new AuthService();
+
         // Create reference to the current users bankaccounts
-        DatabaseReference ref = database.getReference("usersBankAccounts/" + "1234567777");
+        DatabaseReference ref = database.getReference("usersBankAccounts/" + auth.getCurrentUser().getCpr());
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override

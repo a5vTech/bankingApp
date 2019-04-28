@@ -19,6 +19,12 @@ public class BankAccount implements Parcelable {
     public BankAccount() {
     }
 
+    public BankAccount(String type, String name, double balance, String accountNumber) {
+        this.type = type;
+        this.name = name;
+        this.balance = balance;
+        this.accountNumber = accountNumber;
+    }
 
     protected BankAccount(Parcel in) {
         type = in.readString();
