@@ -16,4 +16,10 @@
     <string name="register_info_txt">Velkommen til kea bank!\nFor at kunne oprette dig som kunde skal vi bruge nogle oplysninger om dig</string>
     <string name="cpr_text">Cpr</string>
 
+
+    <string-array name="transfer_options_array">
+        <item>My accounts</item>
+        <item>Other accounts</item>
+    </string-array>
+
 </resources>

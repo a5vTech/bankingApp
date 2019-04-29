@@ -1,11 +1,10 @@
 package dk.tangsolutions.bankingapp.activities;
 
-import android.app.PendingIntent;
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -80,6 +79,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 accountNumberRef.setValue("" + (accountNumber + 2));
 
 
+                                // GO back to login
+                                Intent backToLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(backToLogin);
+                                Toast.makeText(getApplicationContext(), "Welcome to KEA Bank - You can now login", Toast.LENGTH_LONG).show();
+                                finish();
+
                             }
 
                             @Override
@@ -87,7 +92,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }
                         });
-
 
                     } else {
                         Toast.makeText(getApplicationContext(), "A user with that cpr aldready exists!", Toast.LENGTH_LONG).show();

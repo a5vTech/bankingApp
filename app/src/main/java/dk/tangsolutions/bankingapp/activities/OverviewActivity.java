@@ -3,8 +3,8 @@ package dk.tangsolutions.bankingapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,23 +12,17 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.Date;
-
 import dk.tangsolutions.bankingapp.R;
+import dk.tangsolutions.bankingapp.dialogs.Dialog;
 import dk.tangsolutions.bankingapp.models.OverviewAdapter;
 import dk.tangsolutions.bankingapp.models.BankAccount;
-import dk.tangsolutions.bankingapp.models.User;
 import dk.tangsolutions.bankingapp.services.AuthService;
-import dk.tangsolutions.bankingapp.services.UserService;
 
 public class OverviewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -54,7 +48,6 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
 
 
     }
-
 
 
     private void loadData() {
@@ -91,7 +84,7 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
                         }
                     });
                 }
-
+                auth.getCurrentUser().setBankaccounts(bankAccounts);
 
             }
 
@@ -136,14 +129,17 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_overview:
-                Intent intent = new Intent(this, OverviewActivity.class);
-                startActivity(intent);
+                Intent overviewIntent = new Intent(this, OverviewActivity.class);
+                startActivity(overviewIntent);
                 finish();
                 return true;
             case R.id.navigation_pay:
 
                 return true;
             case R.id.navigation_transfer:
+                DialogFragment dialogFragment = new Dialog();
+                ((Dialog) dialogFragment).setContext(this);
+                dialogFragment.show(getSupportFragmentManager(), "miss");
 
                 return true;
 
