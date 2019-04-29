@@ -14,5 +14,6 @@
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="btn_register">Register</string>
     <string name="register_info_txt">Velkommen til kea bank!\nFor at kunne oprette dig som kunde skal vi bruge nogle oplysninger om dig</string>
+    <string name="cpr_text">Cpr</string>
 
 </resources>

@@ -16,7 +16,7 @@
         android:background="@drawable/login_input_background"
         android:ems="10"
         android:gravity="center"
-        android:hint="@string/username_txt"
+        android:hint="@string/cpr_text"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:paddingTop="3dp"
