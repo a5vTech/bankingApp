@@ -95,9 +95,6 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
         });
 
 
-        // Add Value listener to the users bankaccounts (get live updates)
-
-
     }
 
     private void init() {
