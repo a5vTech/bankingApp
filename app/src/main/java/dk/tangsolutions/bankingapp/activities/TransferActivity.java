@@ -42,8 +42,8 @@ public class TransferActivity extends AppCompatActivity {
     }
 
     private void loadAccountData() {
+        Log.d(TAG, "loadAccountData called");
         AuthService auth = new AuthService();
-        Log.d(TAG, "ACC: " + auth.getCurrentUser().getCpr());
 
         DatabaseReference reference = database.getReference("usersBankAccounts/" + auth.getCurrentUser().getCpr());
         reference.addValueEventListener(new ValueEventListener() {

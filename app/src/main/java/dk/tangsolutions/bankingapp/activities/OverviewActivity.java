@@ -26,12 +26,11 @@ import dk.tangsolutions.bankingapp.services.AuthService;
 
 public class OverviewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    public static final String TAG = "OVERVIEWACTIVITY";
     private FirebaseDatabase database;
-    private FirebaseAuth auth;
 
     private BottomNavigationView navigation;
     private RecyclerView rv_account_list;
-    private String TAG = "OVERVIEW";
 
     private ArrayList<BankAccount> bankAccounts = new ArrayList<>();
     private OverviewAdapter adapter = new OverviewAdapter(this, bankAccounts);
@@ -41,16 +40,18 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
-        Log.d("DGDG", "OVERVIEW LOADED");
+        Log.d(TAG, "onCreate called");
         init();
         loadData();
-        Log.d("DGDG", "DATA LOADED");
+
 
 
     }
 
 
+    // Load users bankAccounts
     private void loadData() {
+        Log.d(TAG, "Load data called");
         AuthService auth = new AuthService();
 
         // Create reference to the current users bankaccounts
@@ -94,11 +95,12 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
             }
         });
 
-
     }
 
+
+    // Initialize activity ( Map xml to java )
     private void init() {
-        this.auth = FirebaseAuth.getInstance();
+        Log.d(TAG, "Init called");
         this.database = FirebaseDatabase.getInstance();
         this.navigation = findViewById(R.id.navigation);
         this.navigation.setOnNavigationItemSelectedListener(this);
@@ -107,21 +109,10 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
         this.rv_account_list.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void createDummyValuesInDB() {
-        BankAccount bankAccount = new BankAccount();
-//        bankAccount.setAccountName("Løn");
-//        bankAccount.transferMoney("Jesper", "Mikkel", 500.0, true, new Date());
-//        bankAccount.transferMoney("Jesper", "Mikkel", 500.0, false, new Date());
-//        bankAccount.transferMoney("Jesper", "Mikkel", 20, true, new Date());
-//        bankAccount.setAccountNumber("785225");
-
-        //Add bankAccount to DB as well as update any fields in bankAccount - transactions + more
-//        DatabaseReference reference = database.getReference("bankaccounts/" + bankAccount.getAccountNumber());
-//        reference.setValue(bankAccount);
-
-    }
 
 
+
+    // Navigation bar
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
