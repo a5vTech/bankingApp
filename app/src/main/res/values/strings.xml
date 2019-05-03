@@ -1,22 +1,45 @@
 <resources>
-    <string name="app_name">BankingApp</string>
-    <string name="remeber_me">Remember me?</string>
-    <string name="btn_login_text">Login</string>
-    <string name="password_txt">Password</string>
-    <string name="username_txt">Username</string>
+
+    <!--LOGIN ACTIVITY STRINGS-->
     <string name="logo">Logo</string>
-    <string name="title_activity_overview">Overview</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="overview">overview</string>
-    <string name="CURRENTBANKACC">currBankAccount</string>
-    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="cpr">Cpr</string>
+    <string name="password">Password</string>
+    <string name="btn_login_text">Login</string>
     <string name="btn_register">Register</string>
-    <string name="register_info_txt">Velkommen til kea bank!\nFor at kunne oprette dig som kunde skal vi bruge nogle oplysninger om dig</string>
-    <string name="cpr_text">Cpr</string>
+    <string name="remember_me">Remember me?</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+
+    <!--OVERVIEW ACTIVITY STRINGS-->
+    <string name="overview_title">Overview</string>
+    <string name="CURRENT_BANK_ACC">currBankAccount</string>
 
 
+    <!--REGISTER ACTIVITY STRINGS-->
+    <string name="register_info">Velkommen til kea bank!\nFor at kunne oprette dig som kunde skal vi bruge nogle oplysninger om dig</string>
+    <string name="first_name">Firstname</string>
+    <string name="last_name">Lastname</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phonenumber</string>
+    <string name="address">Address</string>
+
+
+    <!--OVERVIEW CARD ITEM STRINGS-->
+    <string name="acc_name">Account name</string>
+    <string name="acc_no">Account no</string>
+
+    <!--APP SPECIFIC STRINGS-->
+    <string name="app_name">BankingApp</string>
+    <string name="title_activity_overview">Overview</string>
+
+
+    <!--UNUSED FOR NOW-->
+
+    <!--<string name="title_home">Home</string>-->
+    <!--<string name="title_dashboard">Dashboard</string>-->
+    <!--<string name="title_notifications">Notifications</string>-->
+
+
+    <!--TRANSFER DIALOG STRINGS-->
     <string-array name="transfer_options_array">
         <item>My accounts</item>
         <item>Other accounts</item>

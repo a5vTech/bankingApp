@@ -35,7 +35,7 @@ public class TransactionsActivity extends AppCompatActivity {
     private void loadBankAccount() {
         // Fetch accountNumber from previous activity
         Intent intent = getIntent();
-        BankAccount currBankAccount = intent.getParcelableExtra(getString(R.string.CURRENTBANKACC));
+        BankAccount currBankAccount = intent.getParcelableExtra(getString(R.string.CURRENT_BANK_ACC));
 
         this.currBal.setText("Current balance: "+currBankAccount.getBalance());
         // Get Database reference

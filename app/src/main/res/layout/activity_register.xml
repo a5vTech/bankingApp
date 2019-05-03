@@ -14,7 +14,7 @@
             android:id="@+id/tv_registerInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register_info_txt"
+            android:text="@string/register_info"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,9 @@
                 android:id="@+id/tv_Cpr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:text="Cpr"
+                android:text="@string/cpr"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -46,114 +47,127 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Cpr"
+                android:hint="@string/cpr"
                 android:inputType="number|text"
                 android:maxLength="10"
                 android:selectAllOnFocus="false"
-                android:singleLine="false" />
+                android:singleLine="false"
+                android:autofillHints="" tools:targetApi="o"/>
 
             <TextView
                 android:id="@+id/tv_firstname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="Firstname"
+                android:text="@string/first_name"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="5dp" />
 
             <EditText
                 android:id="@+id/inp_firstname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Firstname"
-                android:inputType="textPersonName" />
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:autofillHints="" tools:targetApi="o"/>
 
             <TextView
                 android:id="@+id/tv_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="Lastname"
+                android:text="@string/last_name"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="5dp" />
 
             <EditText
                 android:id="@+id/inp_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Lastname"
-                android:inputType="textPersonName" />
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:autofillHints="" tools:targetApi="o"/>
 
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="Email"
+                android:text="@string/email"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="5dp" />
 
             <EditText
                 android:id="@+id/inp_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:autofillHints="" tools:targetApi="o"/>
 
             <TextView
                 android:id="@+id/tv_phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="Phonenumber"
+                android:text="@string/phone_number"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="5dp" />
 
             <EditText
                 android:id="@+id/inp_phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Phonenumber"
-                android:inputType="phone" />
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:autofillHints="" tools:targetApi="o"/>
 
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="Address"
+                android:text="@string/address"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="5dp" />
 
             <EditText
                 android:id="@+id/inp_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Address"
-                android:inputType="textPostalAddress" />
+                android:hint="@string/address"
+                android:inputType="textPostalAddress"
+                android:autofillHints="" tools:targetApi="o"/>
 
             <TextView
                 android:id="@+id/inp_loginpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="@string/password_txt"
+                android:text="@string/password"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="5dp" />
 
             <EditText
                 android:id="@+id/inp_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/password_txt"
+                android:hint="@string/password"
+                android:importantForAutofill="no"
                 android:inputType="text|textPassword"
-                android:importantForAutofill="no" tools:targetApi="o" />
+                tools:targetApi="o" />
 
             <Button
                 android:id="@+id/button"

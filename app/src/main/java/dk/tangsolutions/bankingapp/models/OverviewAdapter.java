@@ -41,7 +41,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.myView
         myViewHolder.accBal.setText("" + mData.get(i).getBalance());
         myViewHolder.cv_cardItem.setOnClickListener((view) -> {
             Intent intent = new Intent(mContext, TransactionsActivity.class);
-            intent.putExtra(mContext.getString(R.string.CURRENTBANKACC), mData.get(i));
+            intent.putExtra(mContext.getString(R.string.CURRENT_BANK_ACC), mData.get(i));
             mContext.startActivity(intent);
         });
 

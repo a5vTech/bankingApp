@@ -17,7 +17,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.dialogs.Dialog;
 import dk.tangsolutions.bankingapp.models.OverviewAdapter;
@@ -44,6 +47,7 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
         init();
         loadData();
 
+        HashMap<String, BankAccount> testList = new HashMap<>();
 
 
     }
@@ -61,22 +65,21 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 bankAccounts.clear();
-                Log.d("DGDG", "DATA HAS CHANGED: " + dataSnapshot.getValue());
-                Log.d("DGDG", "CHILDREN:   " + dataSnapshot.getChildren());
-
+                Log.d(TAG, "DATA HAS CHANGED: " + dataSnapshot.getValue());
+                Log.d(TAG, "CHILDREN:   " + dataSnapshot.getChildren());
+// For each account attached to use
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Log.d("DGDG", "DATA POSTSNAP KEY: " + postSnapshot.getKey());
+                    Log.d(TAG, "DATA POSTSNAP KEY: " + postSnapshot.getKey());
 
                     DatabaseReference accRef = database.getReference("bankaccounts/" + postSnapshot.getKey());
                     //Load once (Update on reload)
-                    accRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    accRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             BankAccount bankAccount = dataSnapshot.getValue(BankAccount.class);
-                            Log.d("DGDG", postSnapshot.getKey());
+                            Log.d(TAG, postSnapshot.getKey());
                             bankAccount.setAccountNumber(postSnapshot.getKey());
-                            bankAccounts.add(dataSnapshot.getValue(BankAccount.class));
-                            adapter.notifyDataSetChanged();
+                            updateBankAccountList(dataSnapshot.getValue(BankAccount.class));
                         }
 
                         @Override
@@ -97,6 +100,23 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
 
     }
 
+    private void updateBankAccountList(BankAccount bankAccount) {
+        boolean found = false;
+        for (int i = 0; i < bankAccounts.size(); i++) {
+            if (bankAccount.getAccountNumber().equals(bankAccounts.get(i).getAccountNumber())) {
+                found = true;
+                bankAccounts.set(i, bankAccount);
+                adapter.notifyDataSetChanged();
+            }
+        }
+        if (!found) {
+            bankAccounts.add(bankAccount);
+            adapter.notifyDataSetChanged();
+        }
+
+
+    }
+
 
     // Initialize activity ( Map xml to java )
     private void init() {
@@ -108,8 +128,6 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
         this.rv_account_list.setAdapter(adapter);
         this.rv_account_list.setLayoutManager(new LinearLayoutManager(this));
     }
-
-
 
 
     // Navigation bar
