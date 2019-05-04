@@ -89,4 +89,10 @@ public class BankAccount implements Parcelable {
         dest.writeDouble(balance);
         dest.writeString(accountNumber);
     }
+
+
+    @Override
+    public String toString() {
+        return String.format("%s: %.2fkr %s", this.name, this.balance, this.accountNumber);
+    }
 }

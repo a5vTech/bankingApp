@@ -8,6 +8,7 @@ public class User {
 
     //User and profile data
     private String cpr;
+    private int affiliate;
     private String firstName;
     private String lastName;
     private String email;
@@ -100,5 +101,11 @@ public class User {
         this.password = password;
     }
 
+    public int getAffiliate() {
+        return affiliate;
+    }
 
+    public void setAffiliate(int affiliate) {
+        this.affiliate = affiliate;
+    }
 }

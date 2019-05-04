@@ -45,13 +45,6 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.myView
             mContext.startActivity(intent);
         });
 
-//        myViewHolder.courseSubject.setText(mData.get(i).getSubject());
-//        myViewHolder.bankAccount.setOnClickListener((View) -> {
-////            Intent rateCourseIntent = new Intent(mContext, RateCourseActivity.class);
-////            rateCourseIntent.putExtra("Course", mData.get(i));
-////            mContext.startActivity(rateCourseIntent);
-//
-//        });
 
 
     }

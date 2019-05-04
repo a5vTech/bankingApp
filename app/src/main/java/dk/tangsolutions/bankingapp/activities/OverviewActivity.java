@@ -71,6 +71,53 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log.d(TAG, "DATA POSTSNAP KEY: " + postSnapshot.getKey());
 
+                    DatabaseReference accRef = database.getReference("bankaccounts/" + auth.getCurrentUser().getAffiliate() + "/" + postSnapshot.getKey());
+                    //Load once (Update on reload)
+                    accRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            BankAccount bankAccount = dataSnapshot.getValue(BankAccount.class);
+                            Log.d(TAG, postSnapshot.getKey());
+                            bankAccount.setAccountNumber(postSnapshot.getKey());
+                            updateBankAccountList(dataSnapshot.getValue(BankAccount.class));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                auth.getCurrentUser().setBankaccounts(bankAccounts);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    // Load users bankAccounts
+    private void loadDataOld() {
+        Log.d(TAG, "Load data called");
+        AuthService auth = new AuthService();
+
+        // Create reference to the current users bankaccounts
+        DatabaseReference ref = database.getReference("usersBankAccounts/" + auth.getCurrentUser().getCpr());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                bankAccounts.clear();
+                Log.d(TAG, "DATA HAS CHANGED: " + dataSnapshot.getValue());
+                Log.d(TAG, "CHILDREN:   " + dataSnapshot.getChildren());
+// For each account attached to use
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "DATA POSTSNAP KEY: " + postSnapshot.getKey());
+
                     DatabaseReference accRef = database.getReference("bankaccounts/" + postSnapshot.getKey());
                     //Load once (Update on reload)
                     accRef.addValueEventListener(new ValueEventListener() {

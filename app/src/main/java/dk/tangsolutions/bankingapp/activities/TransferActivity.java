@@ -1,5 +1,6 @@
 package dk.tangsolutions.bankingapp.activities;
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import dk.tangsolutions.bankingapp.R;
+import dk.tangsolutions.bankingapp.models.BankAccount;
 import dk.tangsolutions.bankingapp.services.AuthService;
 
 public class TransferActivity extends AppCompatActivity {
@@ -44,34 +46,16 @@ public class TransferActivity extends AppCompatActivity {
     private void loadAccountData() {
         Log.d(TAG, "loadAccountData called");
         AuthService auth = new AuthService();
-
-        DatabaseReference reference = database.getReference("usersBankAccounts/" + auth.getCurrentUser().getCpr());
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<String> accountData = new ArrayList<>();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    DatabaseReference accountsRef = database.getReference("bankaccounts/" + snapshot.getKey());
-                    Log.d(TAG, "ACC: " + snapshot.getKey());
-                    accountData.add(snapshot.getValue(String.class) + " " + snapshot.getKey());
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, accountData);
-                spinnerFrom.setAdapter(adapter);
-                spinnerTo.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
+        ArrayAdapter<BankAccount> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, auth.getCurrentUser().getBankaccounts());
+        spinnerFrom.setAdapter(adapter);
+        spinnerTo.setAdapter(adapter);
 
 
     }
 
 
     public void transfer(View view) {
+        AuthService auth = new AuthService();
         Log.d(TAG, "Transfer called");
         String to = spinnerTo.getSelectedItem().toString().substring(spinnerTo.getSelectedItem().toString().lastIndexOf(" ") + 1);
         String toText = inpTextForReciever.getText().toString();
@@ -86,7 +70,7 @@ public class TransferActivity extends AppCompatActivity {
 
 
         // Withdraw amount and deposit on receiving account
-        DatabaseReference bankaccountsref = database.getReference("bankaccounts");
+        DatabaseReference bankaccountsref = database.getReference("bankaccounts/" + auth.getCurrentUser().getAffiliate());
 
         //withdraw
         bankaccountsref.child(from).child("balance").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,6 +108,14 @@ public class TransferActivity extends AppCompatActivity {
 
             }
         });
+
+
+//        Snackbar.make()
+//        Snackbar.make(findViewById(R.id.cord_layout), "Money has been transferred", Snackbar.LENGTH_LONG).show();
+
+
+        Intent goBackToOverview = new Intent(getApplicationContext(), OverviewActivity.class);
+        startActivity(goBackToOverview);
 
 
     }

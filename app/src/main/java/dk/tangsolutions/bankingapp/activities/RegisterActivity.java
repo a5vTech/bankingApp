@@ -64,6 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 inpEmail.getText().toString(),
                                 inpPhonenumber.getText().toString(),
                                 inpAddress.getText().toString(), inpPassword.getText().toString());
+
+                        //TODO: CALC BASED ON LOCATION
+                        newUser.setAffiliate(1);
+
+                        //TODO: CALC ABOVE BASED ON LOCATION
                         ref.setValue(newUser);
 
                         //Create and attatch new bankaccounts to user
