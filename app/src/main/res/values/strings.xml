@@ -32,6 +32,19 @@
     <string name="title_activity_overview">Overview</string>
 
 
+    <!--TRANSFER ACTIVITY-->
+    <string name="amount">Amount</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="text_for_you">Text for you</string>
+    <string name="text_for_receiver">Text for receiver</string>
+    <string name="date">Date</string>
+    <string name="date_of_transfer">Date of transfer</string>
+    <string name="transfer">Transfer</string>
+    <string name="BALANCE">balance</string>
+    <string name="TRANSFERSTATE">TRANSFERSTATE</string>
+
+
     <!--UNUSED FOR NOW-->
 
     <!--<string name="title_home">Home</string>-->

@@ -18,6 +18,7 @@ public class Dialog extends DialogFragment {
     private Context context;
     private Button btnOtherAccounts, btnMyAccounts;
 
+
     public Dialog() {
     }
 
@@ -25,6 +26,12 @@ public class Dialog extends DialogFragment {
     @NonNull
     @Override
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        /*
+         *  Transferstate 1 => Transfer between own accounts
+         *  Transferstate 2 => Transfer between other accounts
+         */
+
+
         // Use the Builder class for convenient dialog construction
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.transfer_dialog, null);
@@ -39,11 +46,14 @@ public class Dialog extends DialogFragment {
         btnMyAccounts.setOnClickListener(v -> {
             Intent intent = new Intent(context, TransferActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(getString(R.string.TRANSFERSTATE), 1);
             startActivity(intent);
         });
         btnOtherAccounts.setOnClickListener(v -> {
             Intent intent = new Intent(context, TransferActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(getString(R.string.TRANSFERSTATE), 2);
+
             startActivity(intent);
         });
 
