@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 
 import dk.tangsolutions.bankingapp.R;
+import dk.tangsolutions.bankingapp.services.SendMail;
 import dk.tangsolutions.bankingapp.services.AuthService;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-
 
     }
 
@@ -55,5 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void test() {
+        new SendMail(getApplicationContext(), "jesper2604@gmail.com", "Test mail", "besked her").execute();
+
+    }
 
 }
