@@ -1,5 +1,6 @@
 package dk.tangsolutions.bankingapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -57,8 +58,15 @@ public class TransferActivity extends AppCompatActivity {
 
 
     public void transfer(View view) {
-        AuthService auth = new AuthService();
         Log.d(TAG, "Transfer called");
+
+        // Check if amount is entered
+        if (inpAmount.getText().toString().length() < 1) {
+            showToast(getApplicationContext(), "Please enter a valid amount", Toast.LENGTH_LONG);
+            return;
+        }
+
+        AuthService auth = new AuthService();
         String to = spinnerTo.getSelectedItem().toString().substring(spinnerTo.getSelectedItem().toString().lastIndexOf(" ") + 1);
         String toText = inpTextForReciever.getText().toString();
         String fromText = inpTextForYou.getText().toString();
@@ -66,21 +74,42 @@ public class TransferActivity extends AppCompatActivity {
         Double amount = Double.parseDouble(inpAmount.getText().toString());
 
 
+        // Log data from view
         Log.d(TAG, "To: " + to);
         Log.d(TAG, "To text: " + toText);
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "From text: " + fromText);
         Log.d(TAG, "Amount: " + amount);
 
-
+        // TransferState 1 => Own accounts
         if (TRANSFERSTATE == 1) {
             //Withdraw
             transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
             // Deposit
             transferMoney(to, auth.getCurrentUser().getAffiliate(), toText, amount, true);
             success();
-        } else {
+        }
+        // TransferState 2 => Other accounts
+        else if (TRANSFERSTATE == 2) {
+
+            // Check if affiliate is empty
+            if (inpToAff.getText().toString().length() < 1) {
+                Toast.makeText(getApplicationContext(), "Please enter an affiliate! ", Toast.LENGTH_LONG).show();
+                // Empty return - Stops the method from executing more code
+                return;
+            }
+
+            //Check if accNumber is empty
+
+            if (inpToAccountNumber.getText().toString().length() < 1) {
+                Toast.makeText(getApplicationContext(), "Please enter an account number! ", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+
             int transferToAff = Integer.parseInt(inpToAff.getText().toString());
+
+
             String transferToAccountNumber = inpToAccountNumber.getText().toString();
 
 
@@ -175,5 +204,9 @@ public class TransferActivity extends AppCompatActivity {
 
     }
 
+
+    public void showToast(Context context, String message, int duration) {
+        Toast.makeText(context, message, duration).show();
+    }
 
 }

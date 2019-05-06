@@ -3,7 +3,7 @@ package dk.tangsolutions.bankingapp.services;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.util.Log;
+
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
