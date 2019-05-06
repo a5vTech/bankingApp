@@ -97,7 +97,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         Toast.makeText(context, message, duration).show();
     }
 
-
+    /*
+     *
+     *  This method was taken from: https://dzone.com/articles/generate-random-alpha-numeric
+     *
+     */
     public static String randomAlphaNumeric(int count) {
         StringBuilder builder = new StringBuilder();
         while (count-- != 0) {
