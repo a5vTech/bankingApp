@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TransferActivity"
-            android:parentActivityName=".activities.OverviewActivity"></activity>
+        <activity android:name=".activities.ForgotPasswordActivity"></activity>
+        <activity
+            android:name=".activities.TransferActivity"
+            android:parentActivityName=".activities.OverviewActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity
             android:name=".activities.TransactionsActivity"
@@ -20,8 +22,8 @@
             android:label="@string/title_activity_overview" />
         <activity
             android:name=".activities.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

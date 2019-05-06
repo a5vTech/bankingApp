@@ -56,6 +56,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    public void forgotPassword(View view) {
+        Intent forgotPassword = new Intent(this, ForgotPasswordActivity.class);
+        startActivity(forgotPassword);
+    }
+
+
     public void test() {
         new SendMail(getApplicationContext(), "jesper2604@gmail.com", "Test mail", "besked her").execute();
 
