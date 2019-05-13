@@ -27,7 +27,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private Button btnNext, btnUpdate;
 
     private FirebaseDatabase database;
-
     private String resetCode;
 
 

@@ -2,6 +2,7 @@ package dk.tangsolutions.bankingapp.activities;
 
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         init();
 
+        if (savedInstanceState != null) {
+            inpUsername.setText(savedInstanceState.getString("cpr"));
+            inpPassword.setText(savedInstanceState.getString("password"));
+        }
     }
 
     private void init() {
@@ -41,13 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void tempLogin(View view) {
+    public void login(View view) {
         AuthService auth = new AuthService();
         String cpr = inpUsername.getText().toString();
         String password = inpPassword.getText().toString();
         auth.login(cpr, password, getApplicationContext());
-
-
     }
 
     public void register(View view) {
@@ -61,10 +64,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(forgotPassword);
     }
 
-
-    public void test() {
-        new SendMail(getApplicationContext(), "jesper2604@gmail.com", "Test mail", "besked her").execute();
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String cpr = inpUsername.getText().toString();
+        String password = inpPassword.getText().toString();
+        outState.putString("cpr", cpr);
+        outState.putString("password", password);
     }
-
 }

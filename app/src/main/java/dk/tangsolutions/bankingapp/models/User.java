@@ -1,10 +1,13 @@
 package dk.tangsolutions.bankingapp.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public class User implements Parcelable {
 
     //User and profile data
     private String cpr;
@@ -36,6 +39,30 @@ public class User {
 
     // Getters and setters
 
+
+    protected User(Parcel in) {
+        cpr = in.readString();
+        affiliate = in.readInt();
+        firstName = in.readString();
+        lastName = in.readString();
+        email = in.readString();
+        password = in.readString();
+        phoneNumber = in.readString();
+        address = in.readString();
+        bankaccounts = in.createTypedArrayList(BankAccount.CREATOR);
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getCpr() {
         return cpr;
@@ -107,5 +134,23 @@ public class User {
 
     public void setAffiliate(int affiliate) {
         this.affiliate = affiliate;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(cpr);
+        dest.writeInt(affiliate);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(email);
+        dest.writeString(password);
+        dest.writeString(phoneNumber);
+        dest.writeString(address);
+        dest.writeTypedList(bankaccounts);
     }
 }

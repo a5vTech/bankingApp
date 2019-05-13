@@ -31,6 +31,19 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         init();
+
+        if (savedInstanceState != null) {
+            User tempUser = savedInstanceState.getParcelable("tempUser");
+            inpCpr.setText(tempUser.getCpr());
+            inpFirstname.setText(tempUser.getFirstName());
+            inpLastname.setText(tempUser.getLastName());
+            inpEmail.setText(tempUser.getEmail());
+            inpPhonenumber.setText(tempUser.getPhoneNumber());
+            inpAddress.setText(tempUser.getAddress());
+            inpPassword.setText(tempUser.getPassword());
+        }
+
+
     }
 
     private void init() {
@@ -50,7 +63,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void register(View view) {
 
-        if (inpCpr.getText().toString().length() == 10) {
+
+        if (isValid()) {
             DatabaseReference ref = database.getReference("users/" + inpCpr.getText().toString());
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -80,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 long accountNumber = Long.parseLong(dataSnapshot.getValue(String.class));
 
                                 //Create default and budget bankaccount
-                                createDefaultAccounts(accountNumber, newUser.getCpr());
+                                createDefaultAccounts(accountNumber, newUser.getCpr(), newUser.getAffiliate());
                                 accountNumberRef.setValue("" + (accountNumber + 2));
 
 
@@ -110,17 +124,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
-            Toast.makeText(this, "Please enter a valid cpr!", Toast.LENGTH_LONG).show();
         }
 
 
     }
 
 
-    public void createDefaultAccounts(Long accountNumber, String cpr) {
+    public void createDefaultAccounts(Long accountNumber, String cpr, int affiliate) {
         //Create bankaccounts
-        DatabaseReference bankaccountsRef = database.getReference("bankaccounts");
+        DatabaseReference bankaccountsRef = database.getReference("bankaccounts/" + affiliate);
         long defaultAccountNumber = accountNumber;
         long budgetAccountNumber = defaultAccountNumber + 1;
         BankAccount defaultAcc = new BankAccount("Default", "Default", 0, Long.toString(defaultAccountNumber));
@@ -135,4 +147,68 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        User tempUser = new User();
+        tempUser.setCpr(inpCpr.getText().toString());
+        tempUser.setFirstName(inpFirstname.getText().toString());
+        tempUser.setLastName(inpLastname.getText().toString());
+        tempUser.setEmail(inpEmail.getText().toString());
+        tempUser.setPhoneNumber(inpPhonenumber.getText().toString());
+        tempUser.setAddress(inpAddress.getText().toString());
+        tempUser.setPassword(inpPassword.getText().toString());
+        outState.putParcelable("tempUser", tempUser);
+
+    }
+
+    public boolean isValid() {
+        String cpr = inpCpr.getText().toString();
+        String firstName = inpFirstname.getText().toString();
+        String lastName = inpLastname.getText().toString();
+        String email = inpEmail.getText().toString();
+        String phoneNumber = inpPhonenumber.getText().toString();
+        String address = inpAddress.getText().toString();
+        String password = inpPassword.getText().toString();
+
+        if (cpr.length() != 10) {
+            Toast.makeText(this, "Please enter a valid cpr!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (firstName.isEmpty()) {
+            Toast.makeText(this, "Please fill out a firstname!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (lastName.isEmpty()) {
+            Toast.makeText(this, "Please fill out a lastname!", Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Please fill in an email!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (phoneNumber.isEmpty()) {
+            Toast.makeText(this, "Please fill out a phonenumber!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (address.isEmpty()) {
+            Toast.makeText(this, "Please fill out an address!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (password.isEmpty()) {
+            Toast.makeText(this, "Please fill out a password!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (password.length() < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // Default
+        return false;
+    }
+
 }

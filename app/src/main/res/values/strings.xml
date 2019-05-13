@@ -41,6 +41,9 @@
     <string name="date">Date</string>
     <string name="date_of_transfer">Date of transfer</string>
     <string name="transfer">Transfer</string>
+
+
+    <!--DO NOT TRANSLATE  (Used as db identifiers)-->
     <string name="BALANCE">balance</string>
     <string name="TRANSFERSTATE">TRANSFERSTATE</string>
 
