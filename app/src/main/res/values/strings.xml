@@ -46,6 +46,7 @@
     <!--DO NOT TRANSLATE  (Used as db identifiers)-->
     <string name="BALANCE">balance</string>
     <string name="TRANSFERSTATE">TRANSFERSTATE</string>
+    <string name="RandomCodeString">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#</string>
 
 
     <!--UNUSED FOR NOW-->

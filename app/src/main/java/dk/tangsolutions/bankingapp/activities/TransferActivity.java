@@ -3,6 +3,7 @@ package dk.tangsolutions.bankingapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -23,10 +24,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.dialogs.Dialog;
 import dk.tangsolutions.bankingapp.models.BankAccount;
 import dk.tangsolutions.bankingapp.services.AuthService;
+import dk.tangsolutions.bankingapp.services.SendMail;
 
 public class TransferActivity extends AppCompatActivity {
     public static final String TAG = "TRANSFERACTIVITY";
@@ -119,11 +123,20 @@ public class TransferActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() != null) {
-                        // Withdraw
-                        transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
-                        //Deposit
-                        transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
-                        success();
+                        // Open EasyId activity
+
+                        Intent easyId = new Intent(getApplicationContext(), EasyIdActivity.class);
+                        String code = randomEasyIdCode();
+                        new SendMail(getApplicationContext(), auth.getCurrentUser().getEmail(), "EadyId code from KEA BANK", "Here is your EasyId code: " + code).execute();
+
+                        easyId.putExtra("EasyIdCode", code);
+                        startActivityForResult(easyId, 22);
+
+//                        // Withdraw
+//                        transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
+//                        //Deposit
+//                        transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
+//                        success();
                     } else {
                         Snackbar.make(findViewById(R.id.cord_layout), "The account number or affiliate does not exist", Snackbar.LENGTH_LONG).show();
                     }
@@ -209,4 +222,35 @@ public class TransferActivity extends AppCompatActivity {
         Toast.makeText(context, message, duration).show();
     }
 
+
+    public String randomEasyIdCode() {
+        Random random = new Random();
+        return ""+ random.nextInt(99999)+1300;
+}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        AuthService auth = new AuthService();
+        String toText = inpTextForReciever.getText().toString();
+        String fromText = inpTextForYou.getText().toString();
+        String from = spinnerFrom.getSelectedItem().toString().substring(spinnerFrom.getSelectedItem().toString().lastIndexOf(" ") + 1);
+        Double amount = Double.parseDouble(inpAmount.getText().toString());
+        int transferToAff = Integer.parseInt(inpToAff.getText().toString());
+
+
+        String transferToAccountNumber = inpToAccountNumber.getText().toString();
+
+        if (requestCode == 22) {
+            if (resultCode == RESULT_OK) {
+                // Withdraw
+                transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
+                //Deposit
+                transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
+                success();
+            }
+
+        }
+    }
 }
