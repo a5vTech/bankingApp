@@ -19,9 +19,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.services.SendMail;
+import dk.tangsolutions.bankingapp.services.UserService;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
+    private static final String PASSWORD_RESET_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
 
     private EditText inpCpr, inpNewPassword, inpConfirmPassword, inpResetCode;
     private Button btnNext, btnUpdate;
@@ -36,8 +37,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         init();
 
+        if (savedInstanceState != null) {
+            inpCpr.setText(savedInstanceState.getString(getString(R.string.cpr)));
+            inpNewPassword.setText(savedInstanceState.getString(getString(R.string.new_password)));
+            inpConfirmPassword.setText(savedInstanceState.getString(getString(R.string.confirm_password)));
+            inpResetCode.setText(savedInstanceState.getString(getString(R.string.reset_code)));
+        }
+
     }
 
+    /**
+     * This method initializes xml to java
+     */
     private void init() {
         this.database = FirebaseDatabase.getInstance();
         this.inpCpr = findViewById(R.id.inp_forgotCpr);
@@ -51,23 +62,31 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * This method sends a password reset code to the users mail and prepares the view
+     * to accept resetCode and new password
+     */
+
     public void sendResetCode(View view) {
         String cpr = inpCpr.getText().toString();
-        if (cpr.length() > 1) {
+        // Check if Cpr is valid (Length)
+        if (cpr.length() == 10) {
 
 
             DatabaseReference databaseReference = database.getReference("users/" + cpr);
-
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    // Check if user exists and if user has a password
                     if (dataSnapshot.getValue() != null && dataSnapshot.hasChild("password")) {
-
 
                         // A user with that cpr exists!
                         String email = dataSnapshot.child("email").getValue(String.class);
-                        resetCode = randomAlphaNumeric(6);
+                        // Generate resetCode
+                        resetCode = randomResetCode(6);
+                        // Send mail to user with reset code
                         new SendMail(getApplicationContext(), email, "Password reset", "<h1>You have requested a password reset</h1><br/>Reset code: " + resetCode).execute();
+                        // Prepare view for reset code and new password
                         btnNext.setVisibility(View.GONE);
                         inpResetCode.setVisibility(View.VISIBLE);
                         inpNewPassword.setVisibility(View.VISIBLE);
@@ -85,29 +104,29 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
 
         } else {
-            showToast(getApplicationContext(), "Please input a valid cpr!", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Please input a valid cpr!", Toast.LENGTH_LONG).show();
         }
 
 
     }
 
-
-    public void showToast(Context context, String message, int duration) {
-        Toast.makeText(context, message, duration).show();
-    }
-
-
-    public static String randomAlphaNumeric(int count) {
+    /**
+     * This method generates a random reset code
+     */
+    public static String randomResetCode(int count) {
         StringBuilder builder = new StringBuilder();
         while (count-- != 0) {
-            int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
-            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+            int character = (int) (Math.random() * PASSWORD_RESET_STRING.length());
+            builder.append(PASSWORD_RESET_STRING.charAt(character));
         }
         return builder.toString();
     }
 
-
+    /**
+     * This method updates the users password if the resetCode and new passwords match
+     */
     public void updatePassword(View view) {
+        UserService userService = new UserService();
         String enteredRequestCode = inpResetCode.getText().toString();
         String newPassword = inpNewPassword.getText().toString();
         String confirmPassword = inpConfirmPassword.getText().toString();
@@ -115,15 +134,24 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         if (enteredRequestCode.equals(resetCode) && newPassword.equals(confirmPassword)) {
             DatabaseReference passwordRef = database.getReference("users/" + inpCpr.getText().toString() + "/password");
             passwordRef.setValue(newPassword);
-            showToast(getApplicationContext(), "Your password has been updated", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Your password has been updated", Toast.LENGTH_LONG).show();
 
             Intent backToLogin = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(backToLogin);
 
         } else {
-            showToast(getApplicationContext(), "Request code or passwords dont match!", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Request code or passwords don't match!", Toast.LENGTH_LONG).show();
         }
+    }
 
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(getString(R.string.cpr), this.inpCpr.getText().toString());
+        outState.putString(getString(R.string.new_password), this.inpNewPassword.getText().toString());
+        outState.putString(getString(R.string.confirm_password), this.inpConfirmPassword.getText().toString());
+        outState.putString(getString(R.string.reset_code), this.inpResetCode.getText().toString());
 
     }
 }

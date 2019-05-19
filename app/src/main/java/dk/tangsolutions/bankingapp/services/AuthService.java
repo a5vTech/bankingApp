@@ -27,10 +27,10 @@ public class AuthService {
 
 
     public void login(String cpr, String password, Context context) {
-        if (cpr.length() > 0 && password.length() > 1) {
-            // Create reference to the user who is trying to login
+        if (cpr.length() == 10 && password.length() > 1) {
+            // Create reference to the user in the database
             DatabaseReference userRef = database.getReference("users/" + cpr);
-            // Add a listener to check if the user exists and the password matches
+            // Check if the user exists and if the password matches
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -47,9 +47,9 @@ public class AuthService {
                             currentUser = dataSnapshot.getValue(User.class);
                         } else {
                             Toast.makeText(context, "Wrong cpr or password!", Toast.LENGTH_SHORT).show();
-
                         }
                     } else {
+                        // User does not exist
                         Toast.makeText(context, "A user with this cpr does not exist!", Toast.LENGTH_SHORT).show();
 
                     }

@@ -31,11 +31,17 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         init();
 
+
+        // Load saved instance data
         if (savedInstanceState != null) {
             inpUsername.setText(savedInstanceState.getString("cpr"));
             inpPassword.setText(savedInstanceState.getString("password"));
         }
     }
+
+    /**
+     * This method initializes xml to java
+     */
 
     private void init() {
         Log.d(TAG, "Init method called");
@@ -50,19 +56,27 @@ public class LoginActivity extends AppCompatActivity {
         AuthService auth = new AuthService();
         String cpr = inpUsername.getText().toString();
         String password = inpPassword.getText().toString();
+        // Call auth service Login
         auth.login(cpr, password, getApplicationContext());
     }
 
+    /**
+     * This method starts the register activity
+     */
     public void register(View view) {
         Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(intent);
     }
 
 
+    /**
+     * This method starts the Forgot password Activity
+     */
     public void forgotPassword(View view) {
         Intent forgotPassword = new Intent(this, ForgotPasswordActivity.class);
         startActivity(forgotPassword);
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

@@ -56,8 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
         this.inpAddress = findViewById(R.id.inp_address);
         this.inpPassword = findViewById(R.id.inp_password);
         this.database = FirebaseDatabase.getInstance();
-
-
     }
 
 

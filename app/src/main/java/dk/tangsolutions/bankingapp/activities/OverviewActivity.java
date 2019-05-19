@@ -49,7 +49,22 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
     }
 
 
-    // Load users bankAccounts
+    /**
+     * This method initializes xml to java
+     */
+    private void init() {
+        Log.d(TAG, "Init called");
+        this.database = FirebaseDatabase.getInstance();
+        this.navigation = findViewById(R.id.navigation);
+        this.navigation.setOnNavigationItemSelectedListener(this);
+        this.rv_account_list = findViewById(R.id.rv_account_list);
+        this.rv_account_list.setAdapter(adapter);
+        this.rv_account_list.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    /**
+     * This method loads the users bankAccounts
+     */
     private void loadData() {
         Log.d(TAG, "Load data called");
         AuthService auth = new AuthService();
@@ -63,7 +78,7 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
                 bankAccounts.clear();
                 Log.d(TAG, "DATA HAS CHANGED: " + dataSnapshot.getValue());
                 Log.d(TAG, "CHILDREN:   " + dataSnapshot.getChildren());
-// For each account attached to use
+// For each account attached to user
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log.d(TAG, "DATA POSTSNAP KEY: " + postSnapshot.getKey());
 
@@ -96,6 +111,12 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
 
     }
 
+    /**
+     * This method updates the bankaccounts info on the bankaccounts list
+     * It makes sure that there are no duplicate bankaccounts listed and instead replaces its current data
+     *
+     * @param bankAccount Bankaccount to replace
+     */
     private void updateBankAccountList(BankAccount bankAccount) {
         boolean found = false;
         for (int i = 0; i < bankAccounts.size(); i++) {
@@ -114,19 +135,12 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
     }
 
 
-    // Initialize activity ( Map xml to java )
-    private void init() {
-        Log.d(TAG, "Init called");
-        this.database = FirebaseDatabase.getInstance();
-        this.navigation = findViewById(R.id.navigation);
-        this.navigation.setOnNavigationItemSelectedListener(this);
-        this.rv_account_list = findViewById(R.id.rv_account_list);
-        this.rv_account_list.setAdapter(adapter);
-        this.rv_account_list.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-
-    // Navigation bar
+    /**
+     * This method controls the bottom navigation bar
+     *
+     * @param item Menuitem
+     * @return boolean
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

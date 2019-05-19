@@ -47,6 +47,9 @@
     <string name="BALANCE">balance</string>
     <string name="TRANSFERSTATE">TRANSFERSTATE</string>
     <string name="RandomCodeString">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#</string>
+    <string name="new_password">newPassword</string>
+    <string name="confirm_password">confirmPassword</string>
+    <string name="reset_code">resetCode</string>
 
 
     <!--UNUSED FOR NOW-->

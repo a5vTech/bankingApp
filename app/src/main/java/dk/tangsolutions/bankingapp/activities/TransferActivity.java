@@ -4,16 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Random;
 
 import dk.tangsolutions.bankingapp.R;
-import dk.tangsolutions.bankingapp.dialogs.Dialog;
 import dk.tangsolutions.bankingapp.models.BankAccount;
 import dk.tangsolutions.bankingapp.services.AuthService;
 import dk.tangsolutions.bankingapp.services.SendMail;
@@ -47,6 +43,34 @@ public class TransferActivity extends AppCompatActivity {
         init();
         loadAccountData();
 
+
+    }
+
+    private void init() {
+        this.inpAmount = findViewById(R.id.inp_transferAmount);
+        this.inpTextForYou = findViewById(R.id.inp_textForYou);
+        this.inpTextForReciever = findViewById(R.id.inp_textForReceiver);
+        this.inpDate = findViewById(R.id.inp_transferDate);
+        this.spinnerFrom = findViewById(R.id.spinner_from);
+        this.spinnerTo = findViewById(R.id.spinner_to);
+        this.database = FirebaseDatabase.getInstance();
+        this.inpToAff = findViewById(R.id.inp_affNumber);
+        this.inpToAccountNumber = findViewById(R.id.inp_toAccountNumber);
+
+        // Get transferState from intent
+        TRANSFERSTATE = getIntent().getIntExtra(getString(R.string.TRANSFERSTATE), 0);
+
+
+        // Change view dynamically to match transferState
+        if (TRANSFERSTATE == 1) {
+            spinnerTo.setVisibility(View.VISIBLE);
+            inpToAff.setVisibility(View.GONE);
+            inpToAccountNumber.setVisibility(View.GONE);
+        } else {
+            spinnerTo.setVisibility(View.GONE);
+            inpToAff.setVisibility(View.VISIBLE);
+            inpToAccountNumber.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -189,35 +213,6 @@ public class TransferActivity extends AppCompatActivity {
     }
 
 
-    private void init() {
-        this.inpAmount = findViewById(R.id.inp_transferAmount);
-        this.inpTextForYou = findViewById(R.id.inp_textForYou);
-        this.inpTextForReciever = findViewById(R.id.inp_textForReceiver);
-        this.inpDate = findViewById(R.id.inp_transferDate);
-        this.spinnerFrom = findViewById(R.id.spinner_from);
-        this.spinnerTo = findViewById(R.id.spinner_to);
-        this.database = FirebaseDatabase.getInstance();
-        this.inpToAff = findViewById(R.id.inp_affNumber);
-        this.inpToAccountNumber = findViewById(R.id.inp_toAccountNumber);
-
-        // Get transferState from intent
-        TRANSFERSTATE = getIntent().getIntExtra(getString(R.string.TRANSFERSTATE), 0);
-
-
-        // Change view dynamically to match transferState
-        if (TRANSFERSTATE == 1) {
-            spinnerTo.setVisibility(View.VISIBLE);
-            inpToAff.setVisibility(View.GONE);
-            inpToAccountNumber.setVisibility(View.GONE);
-        } else {
-            spinnerTo.setVisibility(View.GONE);
-            inpToAff.setVisibility(View.VISIBLE);
-            inpToAccountNumber.setVisibility(View.VISIBLE);
-        }
-
-    }
-
-
     public void showToast(Context context, String message, int duration) {
         Toast.makeText(context, message, duration).show();
     }
@@ -225,8 +220,8 @@ public class TransferActivity extends AppCompatActivity {
 
     public String randomEasyIdCode() {
         Random random = new Random();
-        return ""+ random.nextInt(99999)+1300;
-}
+        return "" + random.nextInt(99999) + 1300;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
