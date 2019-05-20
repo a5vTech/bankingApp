@@ -19,6 +19,7 @@
         android:hint="@string/cpr"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
+        android:maxLength="10"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:textSize="18sp"

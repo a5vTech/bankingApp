@@ -1,8 +1,15 @@
 package dk.tangsolutions.bankingapp.activities;
 
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +28,7 @@ import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.models.BankAccount;
 import dk.tangsolutions.bankingapp.models.User;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements LocationListener {
     private Button btnRegister;
     private EditText inpCpr, inpFirstname, inpLastname, inpEmail, inpPhonenumber, inpAddress, inpPassword;
     private FirebaseDatabase database;
@@ -69,6 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() == null) {
                         //Create and save new user
+
+                        Log.d("REGISTER", "Registering");
                         User newUser = new User(
                                 inpCpr.getText().toString(),
                                 inpFirstname.getText().toString(),
@@ -93,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 //Create default and budget bankaccount
                                 createDefaultAccounts(accountNumber, newUser.getCpr(), newUser.getAffiliate());
-                                accountNumberRef.setValue("" + (accountNumber + 2));
+                                accountNumberRef.setValue("" + (accountNumber + 3));
 
 
                                 // GO back to login
@@ -133,15 +142,19 @@ public class RegisterActivity extends AppCompatActivity {
         DatabaseReference bankaccountsRef = database.getReference("bankaccounts/" + affiliate);
         long defaultAccountNumber = accountNumber;
         long budgetAccountNumber = defaultAccountNumber + 1;
+        long pensionAccountNumber = defaultAccountNumber + 2;
         BankAccount defaultAcc = new BankAccount("Default", "Default", 0, Long.toString(defaultAccountNumber));
         BankAccount budgetAcc = new BankAccount("Budget", "Budget", 0, Long.toString(budgetAccountNumber));
+        BankAccount pensionAcc = new BankAccount("Pension", "Pension", 500, Long.toString(pensionAccountNumber));
         bankaccountsRef.child(defaultAcc.getAccountNumber()).setValue(defaultAcc);
         bankaccountsRef.child(budgetAcc.getAccountNumber()).setValue(budgetAcc);
+        bankaccountsRef.child(pensionAcc.getAccountNumber()).setValue(pensionAcc);
 
         // Attach new bankaccounts to user
         DatabaseReference usersBankAccountsRef = database.getReference("usersBankAccounts/" + cpr);
         usersBankAccountsRef.child(defaultAcc.getAccountNumber()).setValue(defaultAcc.getName());
         usersBankAccountsRef.child(budgetAcc.getAccountNumber()).setValue(budgetAcc.getName());
+        usersBankAccountsRef.child(pensionAcc.getAccountNumber()).setValue(pensionAcc.getName());
 
 
     }
@@ -206,7 +219,26 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Default
-        return false;
+        return true;
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.d("LOC", "Lat: " + location.getLatitude() + " Lon: " + location.getLongitude());
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

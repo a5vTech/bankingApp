@@ -151,7 +151,7 @@ public class TransferActivity extends AppCompatActivity {
 
                         Intent easyId = new Intent(getApplicationContext(), EasyIdActivity.class);
                         String code = randomEasyIdCode();
-                        new SendMail(getApplicationContext(), auth.getCurrentUser().getEmail(), "EadyId code from KEA BANK", "Here is your EasyId code: " + code).execute();
+                        new SendMail(getApplicationContext(), auth.getCurrentUser().getEmail(), "EasyId code from KEA BANK", "Here is your EasyId code: " + code).execute();
 
                         easyId.putExtra("EasyIdCode", code);
                         startActivityForResult(easyId, 22);
