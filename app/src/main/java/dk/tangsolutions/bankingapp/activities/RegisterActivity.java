@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         init();
-
+        // Handle state changes
         if (savedInstanceState != null) {
             User tempUser = savedInstanceState.getParcelable("tempUser");
             inpCpr.setText(tempUser.getCpr());

@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Random;
 
 import dk.tangsolutions.bankingapp.R;
+import dk.tangsolutions.bankingapp.models.AutoPayment;
 import dk.tangsolutions.bankingapp.models.BankAccount;
 import dk.tangsolutions.bankingapp.services.AuthService;
 import dk.tangsolutions.bankingapp.services.SendMail;
@@ -33,6 +34,7 @@ public class TransferActivity extends AppCompatActivity {
     private EditText inpAmount, inpTextForYou, inpTextForReciever, inpDate, inpToAff, inpToAccountNumber;
     private Spinner spinnerFrom, spinnerTo;
     private static int TRANSFERSTATE = 1;
+    private static Boolean PAYBILL;
 
     private FirebaseDatabase database;
 
@@ -59,6 +61,7 @@ public class TransferActivity extends AppCompatActivity {
 
         // Get transferState from intent
         TRANSFERSTATE = getIntent().getIntExtra(getString(R.string.TRANSFERSTATE), 0);
+        PAYBILL = getIntent().getBooleanExtra("BILLS", false);
 
 
         // Change view dynamically to match transferState
@@ -90,7 +93,7 @@ public class TransferActivity extends AppCompatActivity {
 
         // Check if amount is entered
         if (inpAmount.getText().toString().length() < 1) {
-            showToast(getApplicationContext(), "Please enter a valid amount", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Please enter a valid amount", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -174,6 +177,12 @@ public class TransferActivity extends AppCompatActivity {
             });
         }
 
+
+        DatabaseReference autoPayRef = database.getReference("autoPayments");
+        AutoPayment autoPayment = new AutoPayment(amount, to, from, "end");
+        autoPayRef.push().setValue(autoPayment);
+
+
     }
 
 
@@ -213,11 +222,6 @@ public class TransferActivity extends AppCompatActivity {
     }
 
 
-    public void showToast(Context context, String message, int duration) {
-        Toast.makeText(context, message, duration).show();
-    }
-
-
     public String randomEasyIdCode() {
         Random random = new Random();
         return "" + random.nextInt(99999) + 1300;
@@ -242,7 +246,12 @@ public class TransferActivity extends AppCompatActivity {
                 // Withdraw
                 transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
                 //Deposit
-                transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
+
+                if (!PAYBILL) {
+                    transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
+                }
+
+
                 success();
             }
 

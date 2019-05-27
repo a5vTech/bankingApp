@@ -138,7 +138,7 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
     /**
      * This method controls the bottom navigation bar
      *
-     * @param item Menuitem
+     * @param item MenuItem
      * @return boolean
      */
     @Override
@@ -150,7 +150,10 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
                 finish();
                 return true;
             case R.id.navigation_pay:
-
+                Intent payBill = new Intent(this, TransferActivity.class);
+                payBill.putExtra(getString(R.string.TRANSFERSTATE), 2);
+                payBill.putExtra("BILLS", true);
+                startActivity(payBill);
                 return true;
             case R.id.navigation_transfer:
                 DialogFragment dialogFragment = new Dialog();
@@ -160,7 +163,8 @@ public class OverviewActivity extends AppCompatActivity implements BottomNavigat
                 return true;
 
             case R.id.navigation_menu:
-
+                Intent menuIntent = new Intent(this, MenuActivity.class);
+                startActivity(menuIntent);
                 return true;
         }
         return false;

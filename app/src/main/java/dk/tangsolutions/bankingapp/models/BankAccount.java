@@ -13,7 +13,6 @@ public class BankAccount implements Parcelable {
     private String accountNumber;
 //    private String regNumber;
 
-//    private ArrayList<Transaction> transactions = new ArrayList<>();
 
 
     public BankAccount() {
