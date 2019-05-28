@@ -20,7 +20,8 @@
         <activity
             android:name=".activities.TransferActivity"
             android:parentActivityName=".activities.OverviewActivity" />
-        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".activities.TransactionsActivity"
             android:parentActivityName=".activities.OverviewActivity" />

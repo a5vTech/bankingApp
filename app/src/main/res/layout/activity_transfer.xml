@@ -22,13 +22,14 @@
                 android:ems="10"
                 android:gravity="center"
                 android:hint="@string/amount"
+                android:importantForAutofill="no"
                 android:inputType="number|numberDecimal"
                 android:maxLength="9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                android:importantForAutofill="no" tools:targetApi="o" />
+                tools:targetApi="o" />
 
             <TextView
                 android:id="@+id/textView"
@@ -45,10 +46,11 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/from"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inp_transferAmount" />
 
@@ -58,7 +60,7 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -70,12 +72,12 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/to"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inp_textForYou" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_from" />
 
             <Spinner
                 android:id="@+id/spinner_to"
@@ -102,12 +104,14 @@
                 android:layout_marginRight="8dp"
                 android:ems="10"
                 android:hint="@string/text_for_you"
+                android:importantForAutofill="no"
                 android:inputType="text"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
-                android:importantForAutofill="no" tools:targetApi="o" />
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inp_textForReceiver"
@@ -120,12 +124,14 @@
                 android:layout_marginRight="8dp"
                 android:ems="10"
                 android:hint="@string/text_for_receiver"
+                android:importantForAutofill="no"
                 android:inputType="text"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5"
-                android:importantForAutofill="no" tools:targetApi="o"/>
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inp_transferDate"
@@ -138,13 +144,15 @@
                 android:layout_marginRight="8dp"
                 android:ems="10"
                 android:hint="@string/date"
+                android:importantForAutofill="no"
                 android:inputType="date"
                 android:maxLength="10"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
-                android:importantForAutofill="no" tools:targetApi="o"/>
+                tools:targetApi="o" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -154,6 +162,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="48dp"
                 android:text="@string/text_for_you"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -165,6 +174,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="48dp"
                 android:text="@string/text_for_receiver"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -176,34 +186,41 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/date_of_transfer"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inp_textForReceiver" />
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/rounded_button_background"
                 android:onClick="transfer"
                 android:text="@string/transfer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inp_transferDate" />
+                app:layout_constraintTop_toBottomOf="@+id/cb_autoPay" />
 
             <EditText
                 android:id="@+id/inp_affNumber"
                 android:layout_width="50dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:ems="10"
+                android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="4"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
-                android:importantForAutofill="no" tools:targetApi="o"/>
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inp_toAccountNumber"
@@ -212,12 +229,23 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:ems="10"
+                android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="16"
                 android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@+id/inp_affNumber"
                 app:layout_constraintTop_toTopOf="@+id/inp_affNumber"
-                android:importantForAutofill="no" tools:targetApi="o"/>
+                tools:targetApi="o" />
+
+            <CheckBox
+                android:id="@+id/cb_autoPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="Auto pay - End of month"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_from" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

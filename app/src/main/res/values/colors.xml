@@ -9,5 +9,6 @@
     <color name="loginBackground">#233249</color>
     <color name="logoBackground">#ea5045</color>
     <color name="input_color_background">#FDFDFD</color>
-
+    <color name="mainBackground">#0D47A1</color>
+    <color name="mainContrast">#87B7FF</color>
 </resources>

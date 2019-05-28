@@ -15,7 +15,7 @@
 
 
     <!--REGISTER ACTIVITY STRINGS-->
-    <string name="register_info">Velkommen til kea bank!\nFor at kunne oprette dig som kunde skal vi bruge nogle oplysninger om dig</string>
+    <string name="register_info">Velkommen til kea bank!\nFor at kunne oprette dig som kunde skal vi bruge nogle oplysninger om dig\n</string>
     <string name="first_name">Firstname</string>
     <string name="last_name">Lastname</string>
     <string name="email">Email</string>

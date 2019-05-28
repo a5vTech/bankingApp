@@ -11,6 +11,7 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class TransferActivity extends AppCompatActivity {
     private Spinner spinnerFrom, spinnerTo;
     private static int TRANSFERSTATE = 1;
     private static Boolean PAYBILL;
+    private CheckBox cb_autoPay;
 
     private FirebaseDatabase database;
 
@@ -58,7 +60,7 @@ public class TransferActivity extends AppCompatActivity {
         this.database = FirebaseDatabase.getInstance();
         this.inpToAff = findViewById(R.id.inp_affNumber);
         this.inpToAccountNumber = findViewById(R.id.inp_toAccountNumber);
-
+        this.cb_autoPay = findViewById(R.id.cb_autoPay);
         // Get transferState from intent
         TRANSFERSTATE = getIntent().getIntExtra(getString(R.string.TRANSFERSTATE), 0);
         PAYBILL = getIntent().getBooleanExtra("BILLS", false);
@@ -118,6 +120,12 @@ public class TransferActivity extends AppCompatActivity {
             transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
             // Deposit
             transferMoney(to, auth.getCurrentUser().getAffiliate(), toText, amount, true);
+
+            if (cb_autoPay.isChecked()) {
+                DatabaseReference autoPayRef = database.getReference("autoPayments");
+                AutoPayment autoPayment = new AutoPayment(amount, to, from, "end");
+                autoPayRef.push().setValue(autoPayment);
+            }
             success();
         }
         // TransferState 2 => Other accounts
@@ -178,11 +186,6 @@ public class TransferActivity extends AppCompatActivity {
         }
 
 
-        DatabaseReference autoPayRef = database.getReference("autoPayments");
-        AutoPayment autoPayment = new AutoPayment(amount, to, from, "end");
-        autoPayRef.push().setValue(autoPayment);
-
-
     }
 
 
@@ -205,9 +208,9 @@ public class TransferActivity extends AppCompatActivity {
                 } else {
 
                     if (deposit) {
-                        bankaccountsref.child(accNumber).child("balance").setValue(currentBalance + amount);
+                        bankaccountsref.child(accNumber).child(getString(R.string.BALANCE)).setValue(currentBalance + amount);
                     } else {
-                        bankaccountsref.child(accNumber).child("balance").setValue(currentBalance - amount);
+                        bankaccountsref.child(accNumber).child(getString(R.string.BALANCE)).setValue(currentBalance - amount);
                     }
                 }
             }
@@ -246,9 +249,13 @@ public class TransferActivity extends AppCompatActivity {
                 // Withdraw
                 transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
                 //Deposit
+                transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
 
-                if (!PAYBILL) {
-                    transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
+
+                if (cb_autoPay.isChecked()) {
+                    DatabaseReference autoPayRef = database.getReference("autoPayments");
+                    AutoPayment autoPayment = new AutoPayment(amount, transferToAccountNumber, from, "end");
+                    autoPayRef.push().setValue(autoPayment);
                 }
 
 
