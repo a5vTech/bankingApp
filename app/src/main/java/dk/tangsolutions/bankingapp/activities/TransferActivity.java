@@ -201,7 +201,7 @@ public class TransferActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Long currentBalance = dataSnapshot.getValue(Long.class);
-                if (amount > currentBalance) {
+                if (amount > currentBalance && !deposit) {
                     //TODO : Add snackbar error message
                     Snackbar.make(findViewById(R.id.cord_layout), "You don't have enough money to complete the transaction", Snackbar.LENGTH_LONG).show();
 
