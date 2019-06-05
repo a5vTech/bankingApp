@@ -14,8 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.models.BankAccount;
@@ -32,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements LocationListe
     private Button btnRegister;
     private EditText inpCpr, inpFirstname, inpLastname, inpEmail, inpPhonenumber, inpAddress, inpPassword;
     private FirebaseDatabase database;
+    private Spinner spinnerAffiliate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,13 @@ public class RegisterActivity extends AppCompatActivity implements LocationListe
         this.inpAddress = findViewById(R.id.inp_address);
         this.inpPassword = findViewById(R.id.inp_password);
         this.database = FirebaseDatabase.getInstance();
+        this.spinnerAffiliate = findViewById(R.id.spinner_affiliate);
+        ArrayList<String> affiliates = new ArrayList<>();
+        affiliates.add("Copenhagen");
+        affiliates.add("Odense");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, affiliates);
+        this.spinnerAffiliate.setAdapter(adapter);
+
     }
 
 
@@ -87,7 +99,11 @@ public class RegisterActivity extends AppCompatActivity implements LocationListe
                                 inpAddress.getText().toString(), inpPassword.getText().toString());
 
                         //TODO: CALC BASED ON LOCATION
-                        newUser.setAffiliate(1);
+                        if (spinnerAffiliate.getSelectedItem().toString().equals("Copenhagen")) {
+                            newUser.setAffiliate(1);
+                        } else {
+                            newUser.setAffiliate(2);
+                        }
 
                         //TODO: CALC ABOVE BASED ON LOCATION
                         ref.setValue(newUser);

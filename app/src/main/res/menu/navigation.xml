@@ -14,7 +14,8 @@
     <item
         android:id="@+id/navigation_transfer"
         android:icon="@drawable/ic_transfer_black_24dp"
-        android:title="Transfer" />
+        android:title="Transfer"
+        />
 
     <item
         android:id="@+id/navigation_menu"

@@ -26,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_logo"
-        tools:targetApi="o" />
+        tools:targetApi="o"
+        app:fontFamily="sans-serif"/>
 
     <EditText
         android:id="@+id/inp_loginpassword"
@@ -45,7 +46,8 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/inp_userName"
         app:layout_constraintTop_toBottomOf="@+id/inp_userName"
-        tools:targetApi="o" />
+        tools:targetApi="o"
+        app:fontFamily="sans-serif"/>
 
     <Button
         android:id="@+id/btn_login"
@@ -58,7 +60,8 @@
         app:layout_constraintEnd_toEndOf="@+id/inp_loginpassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inp_loginpassword"
-        app:layout_constraintTop_toBottomOf="@+id/inp_loginpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/inp_loginpassword"
+        app:fontFamily="sans-serif"/>
 
     <Button
         android:id="@+id/btn_register"
@@ -71,7 +74,8 @@
         app:layout_constraintEnd_toEndOf="@+id/inp_loginpassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inp_loginpassword"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:fontFamily="sans-serif"/>
 
     <CheckBox
         android:id="@+id/cb_remember"
@@ -89,7 +93,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_register"
-        tools:targetApi="lollipop" />
+        tools:targetApi="lollipop"
+        app:fontFamily="sans-serif"/>
 
     <ImageView
         android:id="@+id/img_logo"
@@ -101,7 +106,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_fingerprint_black_24dp" />
+        app:srcCompat="@drawable/ic_fingerprint_black_24dp"
+        />
 
     <TextView
         android:id="@+id/btn_resetPassword"
@@ -115,6 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_remember" />
+        app:layout_constraintTop_toBottomOf="@+id/cb_remember"
+        app:fontFamily="sans-serif"/>
 
 </android.support.constraint.ConstraintLayout>

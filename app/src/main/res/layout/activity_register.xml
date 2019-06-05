@@ -194,6 +194,11 @@
                 tools:targetApi="o"
                 app:fontFamily="sans-serif"/>
 
+            <Spinner
+                android:id="@+id/spinner_affiliate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"

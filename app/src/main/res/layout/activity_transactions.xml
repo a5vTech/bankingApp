@@ -5,7 +5,8 @@
     android:id="@+id/transactions_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.TransactionsActivity">
+    tools:context=".activities.TransactionsActivity"
+    app:fontFamily="sans-serif">
 
     <TextView
         android:id="@+id/tv_currentBal"
@@ -15,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:fontFamily="sans-serif"/>
 
     <TextView
         android:id="@+id/transaction1"
@@ -25,5 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_currentBal" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_currentBal"
+        app:fontFamily="sans-serif"/>
 </android.support.constraint.ConstraintLayout>

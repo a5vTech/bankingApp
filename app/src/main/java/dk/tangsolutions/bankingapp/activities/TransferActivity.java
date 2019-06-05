@@ -166,12 +166,6 @@ public class TransferActivity extends AppCompatActivity {
 
                         easyId.putExtra("EasyIdCode", code);
                         startActivityForResult(easyId, 22);
-
-//                        // Withdraw
-//                        transferMoney(from, auth.getCurrentUser().getAffiliate(), fromText, amount, false);
-//                        //Deposit
-//                        transferMoney(transferToAccountNumber, transferToAff, toText, amount, true);
-//                        success();
                     } else {
                         Snackbar.make(findViewById(R.id.cord_layout), "The account number or affiliate does not exist", Snackbar.LENGTH_LONG).show();
                     }
@@ -227,7 +221,7 @@ public class TransferActivity extends AppCompatActivity {
 
     public String randomEasyIdCode() {
         Random random = new Random();
-        return "" + random.nextInt(99999) + 1300;
+        return "" + random.nextInt(9999);
     }
 
     @Override
