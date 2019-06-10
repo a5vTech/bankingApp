@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import dk.tangsolutions.bankingapp.R;
-import dk.tangsolutions.bankingapp.activities.TransactionsActivity;
+import dk.tangsolutions.bankingapp.activities.ShowBankAccountActivity;
 
 public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.myViewHolder> {
     Context mContext;
@@ -40,7 +40,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.myView
         myViewHolder.accNo.setText(""+ mData.get(i).getAccountNumber());
         myViewHolder.accBal.setText("" + mData.get(i).getBalance());
         myViewHolder.cv_cardItem.setOnClickListener((view) -> {
-            Intent intent = new Intent(mContext, TransactionsActivity.class);
+            Intent intent = new Intent(mContext, ShowBankAccountActivity.class);
             intent.putExtra(mContext.getString(R.string.CURRENT_BANK_ACC), mData.get(i));
             mContext.startActivity(intent);
         });
