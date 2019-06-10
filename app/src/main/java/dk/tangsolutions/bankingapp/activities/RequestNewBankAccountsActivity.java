@@ -26,7 +26,7 @@ import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.models.BankAccount;
 import dk.tangsolutions.bankingapp.services.AuthService;
 
-public class NewBankAccountsActivity extends AppCompatActivity {
+public class RequestNewBankAccountsActivity extends AppCompatActivity {
     //    private Button btnRequest;
     private Spinner spinAccountTypes;
     private EditText inpAccountName;
@@ -56,6 +56,8 @@ public class NewBankAccountsActivity extends AppCompatActivity {
         accountTypes.add("Default");
         accountTypes.add("Budget");
         accountTypes.add("Pension");
+        accountTypes.add("Savings");
+        accountTypes.add("Business");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, accountTypes);
         this.spinAccountTypes.setAdapter(adapter);

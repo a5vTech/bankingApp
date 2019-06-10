@@ -1,8 +1,6 @@
 package dk.tangsolutions.bankingapp.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import dk.tangsolutions.bankingapp.R;
 import dk.tangsolutions.bankingapp.services.SendMail;
-import dk.tangsolutions.bankingapp.services.UserService;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     private static final String PASSWORD_RESET_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
@@ -126,7 +123,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
      * This method updates the users password if the resetCode and new passwords match
      */
     public void updatePassword(View view) {
-        UserService userService = new UserService();
         String enteredRequestCode = inpResetCode.getText().toString();
         String newPassword = inpNewPassword.getText().toString();
         String confirmPassword = inpConfirmPassword.getText().toString();
