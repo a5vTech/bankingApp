@@ -5,7 +5,7 @@
     android:id="@+id/layout_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/loginBackground"
+    android:background="@color/mainBackground"
     tools:context=".activities.LoginActivity">
 
     <EditText
@@ -23,11 +23,11 @@
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:textSize="18sp"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_logo"
-        tools:targetApi="o"
-        app:fontFamily="sans-serif"/>
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/inp_loginpassword"
@@ -44,10 +44,10 @@
         android:paddingBottom="3dp"
         android:textColorLink="@android:color/black"
         android:textSize="18sp"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="@+id/inp_userName"
         app:layout_constraintTop_toBottomOf="@+id/inp_userName"
-        tools:targetApi="o"
-        app:fontFamily="sans-serif"/>
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/btn_login"
@@ -57,11 +57,11 @@
         android:background="@drawable/login_button_background"
         android:onClick="login"
         android:text="@string/btn_login_text"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="@+id/inp_loginpassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inp_loginpassword"
-        app:layout_constraintTop_toBottomOf="@+id/inp_loginpassword"
-        app:fontFamily="sans-serif"/>
+        app:layout_constraintTop_toBottomOf="@+id/inp_loginpassword" />
 
     <Button
         android:id="@+id/btn_register"
@@ -71,11 +71,11 @@
         android:background="@drawable/login_button_background"
         android:onClick="register"
         android:text="@string/btn_register"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="@+id/inp_loginpassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inp_loginpassword"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        app:fontFamily="sans-serif"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <CheckBox
         android:id="@+id/cb_remember"
@@ -89,12 +89,12 @@
         android:textColor="@color/input_color_background"
         android:textColorLink="@color/input_color_background"
         android:textSize="18sp"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_register"
-        tools:targetApi="lollipop"
-        app:fontFamily="sans-serif"/>
+        tools:targetApi="lollipop" />
 
     <ImageView
         android:id="@+id/img_logo"
@@ -106,8 +106,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_fingerprint_black_24dp"
-        />
+        app:srcCompat="@drawable/ic_fingerprint_black_24dp" />
 
     <TextView
         android:id="@+id/btn_resetPassword"
@@ -118,10 +117,10 @@
         android:text="@string/forgot_your_password"
         android:textColor="@color/input_color_background"
         android:textSize="16sp"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_remember"
-        app:fontFamily="sans-serif"/>
+        app:layout_constraintTop_toBottomOf="@+id/cb_remember" />
 
 </android.support.constraint.ConstraintLayout>
