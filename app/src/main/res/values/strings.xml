@@ -51,6 +51,7 @@
     <string name="confirm_password">confirmPassword</string>
     <string name="reset_code">resetCode</string>
     <string name="affiliate">Affiliate</string>
+    <string name="SHARED_PREF_LOGIN">current_user</string>
 
 
     <!--UNUSED FOR NOW-->

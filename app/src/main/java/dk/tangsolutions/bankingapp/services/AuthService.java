@@ -45,6 +45,8 @@ public class AuthService {
 
                             // Set the current user to the user who's signed in
                             currentUser = dataSnapshot.getValue(User.class);
+
+
                         } else {
                             Toast.makeText(context, "Wrong cpr or password!", Toast.LENGTH_SHORT).show();
                         }

@@ -1,7 +1,9 @@
 package dk.tangsolutions.bankingapp.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +39,13 @@ public class LoginActivity extends AppCompatActivity {
             inpUsername.setText(savedInstanceState.getString("cpr"));
             inpPassword.setText(savedInstanceState.getString("password"));
         }
+        loadSharedPref();
+    }
+
+    private void loadSharedPref() {
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.SHARED_PREF_LOGIN), Context.MODE_PRIVATE);
+        this.inpUsername.setText(preferences.getString("cpr", ""));
+        this.cb_remember.setChecked(preferences.getBoolean("remember_me", false));
     }
 
     /**
@@ -58,6 +67,17 @@ public class LoginActivity extends AppCompatActivity {
         String password = inpPassword.getText().toString();
         // Call auth service Login
         auth.login(cpr, password, getApplicationContext());
+
+        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.SHARED_PREF_LOGIN), MODE_PRIVATE).edit();
+        if (!this.cb_remember.isChecked()) {
+            editor.clear();
+        } else {
+            editor.putString("cpr", cpr);
+            editor.putBoolean("remember_me", this.cb_remember.isChecked());
+        }
+        editor.apply();
+
+
     }
 
     /**
